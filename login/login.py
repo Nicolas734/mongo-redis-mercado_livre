@@ -1,9 +1,11 @@
+from http import client
 from bson.json_util import dumps
 from bson.objectid import ObjectId
+import time
 
 def cadastrar(client_mongo,client_redis):
     mycol = client_mongo.usuarios
-    usuario = mycol.find_one(ObjectId('6335e0ca502273bf5be0732c'))
+    usuario = mycol.find_one(ObjectId('6328e1f92e18e5646b7c57f2'))
     
     for favorito in usuario['lista_favoritos']:
         
@@ -13,17 +15,21 @@ def cadastrar(client_mongo,client_redis):
     print(client_redis.hgetall('user:' + usuario['email']))
     print(client_redis.hkeys('user:' + usuario['email']))
     print(client_redis.keys())
-    #print(client_redis.delete("user:nicolas@gmail.com"))
+    # print(client_redis.delete("user:nicolas@gmail.com"))
 
 def login(client_mongo,client_redis):
     mycol = client_mongo.usuarios
-    usuario = mycol.find_one(ObjectId('6335e0ca502273bf5be0732c'))
-    client_redis.hset('user:' + usuario['email'], 'status', 'logado')    
+    usuario = mycol.find_one(ObjectId('6328e1f92e18e5646b7c57f2'))
+    client_redis.hset('user:' + usuario['email'], 'status', 'logado')
+    client_redis.expire('user:' + usuario['email'], 60)    
     print(client_redis.hget('user:' + usuario['email'], 'status'))
 
 
 def deslogar(client_mongo,client_redis):
     mycol = client_mongo.usuarios
-    usuario = mycol.find_one(ObjectId('6335e0ca502273bf5be0732c'))
+    usuario = mycol.find_one(ObjectId('6328e1f92e18e5646b7c57f2'))
     client_redis.hset('user:' + usuario['email'], 'status', 'deslogado')    
     print(client_redis.hget('user:' + usuario['email'], 'status'))
+
+def time_out(client_redis,key, time):
+    client_redis.expire(key,time)
