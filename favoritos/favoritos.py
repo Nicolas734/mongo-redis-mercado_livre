@@ -8,7 +8,7 @@ def favoritar(client_mongo,client_redis):
     mycol_usuarios = client_mongo.usuarios
     mycol_produtos = client_mongo.produtos
     usuario = mycol_usuarios.find_one(ObjectId('6328e1f92e18e5646b7c57f2'))
-    
+
     ## salva novos produtos a lista de favoritos no redis
     favoritos.append(mycol_produtos.find_one(ObjectId('630d2cceca06592c1def5643')))
     favoritos.append(mycol_produtos.find_one(ObjectId('632a0c86b07c794dc11db15a')))
@@ -45,7 +45,7 @@ def favoritar(client_mongo,client_redis):
             }}, upsert=True)
             
             print(client_redis.hvals("user:" + usuario['email']))
-        
-        print('usuario não esta logado')
+        else:
+            print('usuario não esta logado')
     else:
         print('usuario não encontrado')
