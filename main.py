@@ -21,8 +21,8 @@ while execucao:
         print('''\nOpções: \n
         [1] Cadastrar
         [2] Login
-        [3] Favoritar
-        [4] Deslogar
+        [3] Deslogar
+        [4] Favoritar
         [0] Sair
         ''')
 
@@ -34,9 +34,9 @@ while execucao:
             case 2:
                 login.login(mydb,client_redis)
             case 3:
-                favoritos.favoritar(mydb,client_redis)
-            case 4:
                 login.deslogar(mydb,client_redis)
+            case 4:
+                favoritos.favoritar(mydb,client_redis)
             case 0:
                 execucao = False
                 print("\nAté mais \n")
