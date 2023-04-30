@@ -7,9 +7,9 @@ import favoritos.favoritos as favoritos
 
 ##Nicolas   6328e1f92e18e5646b7c57f2
 
-client_mongo = pymongo.MongoClient("mongodb+srv://Nicolas:senha@nicolas.yt3g1l9.mongodb.net/?retryWrites=true&w=majority")
-client_redis = redis.Redis(host='redis-10061.c11.us-east-1-3.ec2.cloud.redislabs.com',
-    port= 10061,
+client_mongo = pymongo.MongoClient("mongodb+srv://Nicolas:NKpAgEPNEdDGuE1F@nicolas.yt3g1l9.mongodb.net/?retryWrites=true&w=majority")
+client_redis = redis.Redis(host='redis-19904.c266.us-east-1-3.ec2.cloud.redislabs.com',
+    port= 19904,
     password='senha')
 
 mydb = client_mongo.mercado_livre
